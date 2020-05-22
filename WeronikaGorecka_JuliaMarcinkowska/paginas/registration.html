@@ -1,8 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Sign In</title>
-
+    <title>Register</title>
     <link rel="stylesheet" href="bootstrap-4.5.0/css/bootstrap.min.css"/>
 
     <style>
@@ -27,9 +26,7 @@
             padding: 15px;
             margin: auto;
         }
-        .form-signin .checkbox {
-            font-weight: 400;
-        }
+
         .form-signin .form-control {
             position: relative;
             box-sizing: border-box;
@@ -37,19 +34,11 @@
             padding: 10px;
             font-size: 16px;
         }
+
         .form-signin .form-control:focus {
             z-index: 2;
         }
-        .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+
     </style>
 </head>
 <body class="text-center">
@@ -59,10 +48,13 @@
 </div>
 
 <form class="form-signin">
-    <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
-    <input type="email" id="inputLogin" class="form-control mt-lg-1" placeholder="Login" required autofocus>
+    <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+    <input type="text" id="name" class="form-control mt-lg-1" placeholder="Name" required autofocus>
+    <input type="email" id="email" class="form-control mt-lg-1" placeholder="Email" required>
+    <input type="text" id="inputLogin" class="form-control mt-lg-1" placeholder="Login" required>
     <input type="password" id="inputPassword" class="form-control mt-lg-1" placeholder="Password" required>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-primary btn-block mt-lg-1" type="submit">Sign in</button>
 </form>
+
 </body>
 </html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Client page</title>
+    <link rel="stylesheet" href="bootstrap-4.5.0/css/bootstrap.min.css"/>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="d-flex">
+    <img src="resources/bus_icon.png" class="mx-auto mt-lg-5 mb-lg-4" style="width: 250px;"/>
+</div>
+<form class="d-flex justify-content-center">
+    <select class="custom-select w-25 mx-lg-3" id="routeSelect">
+        <option selected>Choose route</option>
+        <option value="1">Route 1</option>
+        <option value="2">Route 2</option>
+    </select>
+    <input type="date" id="dateSearch" class="form-control w-25 mx-lg-3" placeholder="Date">
+    <button class="btn btn-dark" type="submit">Search</button>
+</form>
+</body>
+</html>
