@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <title>Sign In</title>
-
     <link rel="stylesheet" href="bootstrap-4.5.0/css/bootstrap.min.css"/>
 
     <style>
@@ -58,10 +57,10 @@
     <img src="resources/bus_icon.png">
 </div>
 
-<form class="form-signin">
+<form class="form-signin" action="signin.php" method="post">
     <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
-    <input type="email" id="inputLogin" class="form-control mt-lg-1" placeholder="Login" required autofocus>
-    <input type="password" id="inputPassword" class="form-control mt-lg-1" placeholder="Password" required>
+    <input type="text" name="login" class="form-control mt-lg-1" placeholder="Login" required autofocus>
+    <input type="password" name="password" class="form-control mt-lg-1" placeholder="Password" required>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 </form>
 </body>

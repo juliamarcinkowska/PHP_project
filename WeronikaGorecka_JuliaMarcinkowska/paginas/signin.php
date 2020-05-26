@@ -1,0 +1,38 @@
+<?php
+include "../basedados/basedados.h";
+
+session_start();
+
+if (isset($_POST["login"]) && isset($_POST["password"])) {
+    $login = $_POST["login"];
+    $password = $_POST["password"];
+    global $conn;
+    $sql = "SELECT * FROM users WHERE login='" . $login . "' AND password='" . $password . "'";
+    $retval = mysqli_query($conn, $sql);
+    if (!$retval) {
+        die('Could not get data: ' . mysqli_error($conn));
+    }
+    $row = mysqli_fetch_array($retval);
+
+    if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0) {
+        $_SESSION["user"] = $row["name"];
+        $_SESSION["type"] = $row["usertype"];
+    } else {
+        $_SESSION["user"] = -1;
+        $_SESSION["tipo"] = -1;
+    }
+
+    switch ($_SESSION["type"]) {
+        case 1:
+            header('refresh:0.5; url=client_page.php');
+            break;
+        case 3:
+        case 2:
+            header('refresh:0.5; url=employee_page.php');
+            break;
+    }
+} else {
+    session_destroy();
+    header("refresh:0;url = ./index.html");
+}
+
