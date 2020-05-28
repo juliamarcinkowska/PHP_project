@@ -47,7 +47,7 @@
     <img src="resources/bus_icon.png">
 </div>
 <div>
-    <?
+    <?php
     include "../basedados/basedados.h";
     session_start();
     $user_id = $_SESSION["user"];
@@ -62,16 +62,19 @@
     $email = $row["email"];
     $login = $row["login"];
     $password = $row["password"];
-    echo $name . $email . $login . $password;
     ?>
 </div>
 <form class='form-signin' action='edit_data.php' method='post'>
     <h1 class='h3 mb-3 font-weight-normal'>Edit personal information</h1>
-    <input type='text' name='name' class='form-control mt-lg-1' value='<?php echo $name; ?>' autofocus/>
-    <input type='email' name='email' class='form-control mt-lg-1' value='<?php echo $email; ?>'/>
-    <input type='text' name='login' class='form-control mt-lg-1' value='<?php echo $login; ?>'/>
-    <input type='password' name='password' class='form-control mt-lg-1' value='<?php echo $password; ?>'/>
-    <button class='btn btn-lg btn-primary btn-block mt-lg-1' type='submit'>Register</button>
+    <input type='text' name='name' class='form-control mt-lg-1' placeholder="Name" value='<?php echo $name; ?>'
+           autofocus required/>
+    <input type='email' name='email' class='form-control mt-lg-1' placeholder="Email" value='<?php echo $email; ?>'
+           required/>
+    <input type='text' name='login' class='form-control mt-lg-1' placeholder="Login" value='<?php echo $login; ?>'
+           required/>
+    <input type='password' name='password' class='form-control mt-lg-1' placeholder="Password"
+           value='<?php echo $password; ?>' required/>
+    <button class='btn btn-lg btn-primary btn-block mt-lg-1' type='submit'>Submit</button>
 </form>
 
 </body>

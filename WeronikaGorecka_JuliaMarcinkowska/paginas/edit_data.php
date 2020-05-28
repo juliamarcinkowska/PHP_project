@@ -16,6 +16,26 @@ if (isset($_SESSION["user"])) {
         die('Could not get data: ' . mysqli_error($conn));
     }
     $row = mysqli_fetch_array($retval);
+    $sql = "UPDATE users SET name='" . $name . "', email='" . $email . "', login='" . $login . "', 
+            password='" . $password . "' WHERE id=" . $user_id;
+    $retval = mysqli_query($conn, $sql);
+    if (!$retval) {
+        die('Could not update data: ' . mysqli_error($conn));
+    }
+    if (mysqli_affected_rows($conn) == 1)
+        echo "Edition of personal information successful";
+    else
+        echo "Edition of personal information failed, try again later or contact us.";
+
+    switch ($_SESSION["type"]) {
+        case 1:
+            header('refresh:2; url=client_page.php');
+            break;
+        case 3:
+        case 2:
+            header('refresh:2; url=employee_page.php');
+            break;
+    }
 } else {
     session_destroy();
     header("refresh:0;url = ./index.html");
