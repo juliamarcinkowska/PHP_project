@@ -14,12 +14,17 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
     }
     $row = mysqli_fetch_array($retval);
 
-    if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0) {
-        $_SESSION["user"] = $row["name"];
+    if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0 && $row["status"] == 1) {
+        $_SESSION["user"] = $row["ID"];
         $_SESSION["type"] = $row["usertype"];
-    } else {
+    } else if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0 && $row["status"] == 0){
+        echo "Your account is registered, but not yet confirmed.";
         $_SESSION["user"] = -1;
-        $_SESSION["tipo"] = -1;
+        $_SESSION["type"] = -1;
+        header('refresh:3; url=index.html');
+    }else {
+        $_SESSION["user"] = -1;
+        $_SESSION["type"] = -1;
     }
 
     switch ($_SESSION["type"]) {
