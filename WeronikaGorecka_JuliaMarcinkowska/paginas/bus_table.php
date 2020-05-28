@@ -37,21 +37,22 @@
         include "../basedados/basedados.h";
         session_start();
         global $conn;
-        $sql = "SELECT * FROM courses where ID=" . $_POST["route_select"];
+        $course_id = $_POST["route_select"];
+        $date_sel = $_POST["date_search"];
+        $sql = "SELECT * FROM courses where ID=" . $course_id;
         $retval = mysqli_query($conn, $sql);
         if (!$retval) {
             die('Could not get data: ' . mysqli_error($conn));
         }
         while ($row = mysqli_fetch_array($retval)) {
-            $sql_r = "SELECT sum(pass_no) AS val_sum FROM tickets where course_id=" . $_POST["route_select"] . " AND date=" . $_POST["date_search"];
+            $sql_r = "SELECT sum(pass_no) FROM tickets where course_id=" . $course_id . " AND date='" . $date_sel . "'";
             $retval_r = mysqli_query($conn, $sql_r);
             if (!$retval_r) {
                 die('Could not get data: ' . mysqli_error($conn));
             }
             $res = mysqli_fetch_array($retval_r);
-            echo $res[0];
             $places_left = $row['capacity'] - $res[0];
-            echo "<td>" . $_POST["date_search"] . "</td>";
+            echo "<td>" . $date_sel . "</td>";
             echo "<td>" . $row['city_from'] . "</td>";
             echo "<td>" . $row['city_to'] . "</td>";
             echo "<td>" . $row['hour_dep'] . "</td>";
