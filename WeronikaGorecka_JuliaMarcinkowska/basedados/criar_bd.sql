@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2020 at 03:46 PM
+-- Generation Time: May 28, 2020 at 02:46 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -12,13 +12,15 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
 --
 -- Database: `cbbus`
 --
-
- CREATE DATABASE cbbus;
-
- USE cbbus;
 
 -- --------------------------------------------------------
 
@@ -55,16 +57,17 @@ CREATE TABLE `tickets` (
   `course_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `pass_no` int(11) NOT NULL,
-  `date` date NOT NULL
+  `date` date NOT NULL,
+  `status` enum('1','0','-1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`ID`, `course_id`, `user_id`, `pass_no`, `date`) VALUES
-(1, 1, 1, 2, '2020-05-10'),
-(2, 2, 1, 1, '2020-05-10');
+INSERT INTO `tickets` (`ID`, `course_id`, `user_id`, `pass_no`, `date`, `status`) VALUES
+(1, 1, 1, 2, '2020-05-10', '0'),
+(2, 2, 1, 1, '2020-05-10', '0');
 
 -- --------------------------------------------------------
 
@@ -78,17 +81,18 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `login` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `usertype` int(11) NOT NULL
+  `usertype` int(11) NOT NULL,
+  `status` enum('1','0','-1') NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `name`, `email`, `login`, `password`, `usertype`) VALUES
-(1, 'Roberto Fidalgo da Silva', 'roberto@email.com', 'cliente', 'cliente', 1),
-(2, 'Clara Branco Ferreira', 'clara.ferreira@email.com', 'admin', 'admin', 3),
-(3, 'Joao Lopes', 'lopes.joao@email.com', 'funcionario', 'funcionario', 2);
+INSERT INTO `users` (`ID`, `name`, `email`, `login`, `password`, `usertype`, `status`) VALUES
+(1, 'Roberto Fidalgo da Silva', 'roberto@email.com', 'cliente', 'cliente', 1, '1'),
+(2, 'Clara Branco Ferreira', 'clara.ferreira@email.com', 'admin', 'admin', 3, '1'),
+(3, 'Joao Lopes', 'lopes.joao@email.com', 'funcionario', 'funcionario', 2, '1');
 
 -- --------------------------------------------------------
 
@@ -188,3 +192,6 @@ ALTER TABLE `users`
   ADD CONSTRAINT `usertypeFK` FOREIGN KEY (`usertype`) REFERENCES `usertypes` (`ID`);
 COMMIT;
 
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
