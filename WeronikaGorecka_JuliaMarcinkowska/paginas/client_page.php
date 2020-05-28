@@ -20,6 +20,10 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
         body {
             height: 100%;
         }
+
+        th {
+            width: 200px;
+        }
     </style>
 </head>
 
@@ -58,8 +62,54 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
             Your reservations
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="search_bus.html" class="btn btn-dark">Buy new ticket</a>
+            <p class="card-text">
+            <table style='text-align:center;'>
+                <tr>
+                    <th>Date</th>
+                    <th>City from</th>
+                    <th>City to</th>
+                    <th>Departure time</th>
+                    <th>Arrival time</th>
+                    <th>No of passengers</th>
+                    <th>Status</th>
+                </tr>
+                <?php
+                $sql = "SELECT * FROM tickets WHERE user_id=" . $user_id;
+                $retval = mysqli_query($conn, $sql);
+                if (!$retval) {
+                    die('Could not get data: ' . mysqli_error($conn));
+                }
+                while ($row = mysqli_fetch_array($retval)) {
+                    echo "<tr><td>" . $row["date"] . "</td>";
+                    $sql_c = "SELECT * FROM courses WHERE ID =" . $row["course_id"];
+                    $retval_c = mysqli_query($conn, $sql_c);
+                    if (!$retval_c) {
+                        die('Could not get data: ' . mysqli_error($conn));
+                    }
+                    $course = mysqli_fetch_array($retval_c);
+                    echo "<td>" . $course['city_from'] . "</td>";
+                    echo "<td>" . $course['city_to'] . "</td>";
+                    echo "<td>" . $course['hour_dep'] . "</td>";
+                    echo "<td>" . $course['hour_arr'] . "</td>";
+                    echo "<td>" . $row["pass_no"] . "</td>";
+                    switch ($row["status"]) {
+                        case 0:
+                            $status = "Reserved";
+                            break;
+                        case 1:
+                            $status = "Payed for";
+                            break;
+                        case -1:
+                            $status = "Cancelled";
+                            break;
+                    }
+                    echo "<td>" . $status . "</td></tr>";
+                }
+                ?>
+            </table>
+            <br>
+            </p>
+            <a href="search_bus.php" class="btn btn-dark">Buy new ticket</a>
         </div>
     </div>
 </div>

@@ -23,7 +23,7 @@ if (isset($_SESSION["user"])) {
         die('Could not update data: ' . mysqli_error($conn));
     }
     if (mysqli_affected_rows($conn) == 1)
-        echo "Edition of personal information successful";
+        echo "Edition of personal information successful.";
     else
         echo "Edition of personal information failed, try again later or contact us.";
 
