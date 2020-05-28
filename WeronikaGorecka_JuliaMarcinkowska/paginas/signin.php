@@ -19,7 +19,7 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
         $_SESSION["type"] = $row["usertype"];
     } else {
         $_SESSION["user"] = -1;
-        $_SESSION["tipo"] = -1;
+        $_SESSION["type"] = -1;
     }
 
     switch ($_SESSION["type"]) {
@@ -35,4 +35,4 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
     session_destroy();
     header("refresh:0;url = ./index.html");
 }
-
+?>
