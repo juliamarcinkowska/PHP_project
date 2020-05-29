@@ -11,7 +11,6 @@ if (isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["login"]) &&
     global $conn;
     $sql = "INSERT INTO users (name, email, login, password, usertype) VALUES (" . "'" . $name . "'" . "," . "'" . $email
         . "'" . "," . "'" . $login . "'" . "," . "'" . $password . "'" . "," . "1" . ")";
-    echo $sql;
     $retval = mysqli_query($conn, $sql);
     if (!$retval) {
         die('Could not insert data: ' . mysqli_error($conn));

@@ -45,13 +45,15 @@
             die('Could not get data: ' . mysqli_error($conn));
         }
         while ($row = mysqli_fetch_array($retval)) {
-            $sql_r = "SELECT sum(pass_no) FROM tickets where course_id=" . $course_id . " AND date='" . $date_sel . "'";
+            $sql_r = "SELECT sum(pass_no) FROM tickets where course_id=" . $course_id . " AND date='" . $date_sel .
+                "'AND status <> -1";
             $retval_r = mysqli_query($conn, $sql_r);
             if (!$retval_r) {
                 die('Could not get data: ' . mysqli_error($conn));
             }
             $res = mysqli_fetch_array($retval_r);
             $places_left = $row['capacity'] - $res[0];
+            $course = $row['ID'];
             echo "<td>" . $date_sel . "</td>";
             echo "<td>" . $row['city_from'] . "</td>";
             echo "<td>" . $row['city_to'] . "</td>";
@@ -59,7 +61,7 @@
             echo "<td>" . $row['hour_arr'] . "</td>";
             echo "<td>" . $row['price'] . "</td>";
             echo "<td>" . $places_left . "</td>";
-            echo "<td><a href='#' class='btn btn-dark'>Buy</a></td></tr>";
+            echo "<td><a href='confirm_buy.php?date=" . $date_sel . "&course_id=" . $course_id . "' class='btn btn-dark'>Buy</a></td></tr>";
         }
         ?>
     </table>
