@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+    echo "Error, you are not logged in, redirecting to main page.";
+    header('refresh:2; url=index.html');
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -49,12 +57,20 @@
                         die('Could not get data: ' . mysqli_error($conn));
                     }
                     $course = mysqli_fetch_array($retval_c);
+                    $sql_r = "SELECT sum(pass_no) FROM tickets where course_id=" . $course_id . " AND date='" . $date .
+                        "'AND status <> -1";
+                    $retval_r = mysqli_query($conn, $sql_r);
+                    if (!$retval_r) {
+                        die('Could not get data: ' . mysqli_error($conn));
+                    }
+                    $res = mysqli_fetch_array($retval_r);
+                    $places_left = $course['capacity'] - $res[0];
                     echo "<td>" . $course['city_from'] . "</td>";
                     echo "<td>" . $course['city_to'] . "</td>";
                     echo "<td>" . $course['hour_dep'] . "</td>";
                     echo "<td>" . $course['hour_arr'] . "</td>";
                     echo "<td><form method='get' action='buy_ticket.php'>";
-                    echo "<input type='number' name='pass_no' min='1' max='14' autofocus required/>";
+                    echo "<input type='number' name='pass_no' min='1' max='$places_left' autofocus required/>";
                     echo "<input type='hidden' name='course_id' value='$course_id'/>";
                     echo "<input type='hidden' name='date' value='$date'/>";
                     echo "<input type='submit' class='btn btn-dark mt-lg-1' value='Confirm purchase'/></td>";
@@ -65,5 +81,8 @@
             </p>
         </div>
     </div>
+</div>
+<div class="d-flex justify-content-center">
+    <a href="client_page.php" class="btn btn-dark">Cancel</a>
 </div>
 </body>

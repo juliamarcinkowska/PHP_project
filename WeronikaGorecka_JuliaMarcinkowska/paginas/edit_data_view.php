@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+    echo "Error, you are not logged in, redirecting to main page.";
+    header('refresh:2; url=index.html');
+    exit();
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>

@@ -2,6 +2,11 @@
 include "../basedados/basedados.h";
 
 session_start();
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+    echo "Error, you are not logged in, redirecting to main page.";
+    header('refresh:2; url=index.html');
+    exit();
+}
 
 if (isset($_SESSION["user"])) {
     $user_id = $_SESSION["user"];

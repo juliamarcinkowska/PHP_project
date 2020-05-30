@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+    echo "Error, you are not logged in, redirecting to main page.";
+    header('refresh:2; url=index.html');
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -18,6 +26,9 @@
 </head>
 
 <body>
+<div class="d-flex justify-content-end m-2">
+    <a href="logout.php" class="btn btn-lg btn-dark mr-1">Log out</a>
+</div>
 <div class="d-flex">
     <img src="resources/bus_icon.png" class="mx-auto mt-lg-5 mb-lg-4" style="width: 250px;"/>
 </div>
@@ -53,7 +64,6 @@
             }
             $res = mysqli_fetch_array($retval_r);
             $places_left = $row['capacity'] - $res[0];
-            $course = $row['ID'];
             echo "<td>" . $date_sel . "</td>";
             echo "<td>" . $row['city_from'] . "</td>";
             echo "<td>" . $row['city_to'] . "</td>";

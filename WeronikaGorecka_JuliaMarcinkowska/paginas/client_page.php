@@ -2,6 +2,11 @@
 include "../basedados/basedados.h";
 
 session_start();
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+    echo "Error, you are not logged in, redirecting to main page.";
+    header('refresh:2; url=index.html');
+    exit();
+}
 if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] != 1 && $_SESSION["type"] != -1) {
     echo "Error, redirecting to employee page.";
     header('refresh:2; url=employee_page.php');
@@ -28,6 +33,9 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
 </head>
 
 <body class="text-center">
+<div class="d-flex justify-content-end m-2">
+    <a href="logout.php" class="btn btn-lg btn-dark mr-1">Log out</a>
+</div>
 <div class="d-flex">
     <img src="resources/bus_icon.png" class="mx-auto mt-lg-5 mb-lg-4" style="width: 250px;"/>
 </div>
