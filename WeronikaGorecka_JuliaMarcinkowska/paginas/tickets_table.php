@@ -2,7 +2,7 @@
 include "../basedados/basedados.h";
 
 session_start();
-if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] == -1) {
     echo "Error, you are not logged in, redirecting to main page.";
     header('refresh:2; url=index.html');
     exit();
@@ -54,7 +54,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
         </tr>
         <?php
         include "../basedados/basedados.h";
-        session_start();
+
         global $conn;
         $sql = "SELECT * FROM tickets";
         $retval = mysqli_query($conn, $sql);

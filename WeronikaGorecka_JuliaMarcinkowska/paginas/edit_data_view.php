@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
+if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] == -1) {
     echo "Error, you are not logged in, redirecting to main page.";
     header('refresh:2; url=index.html');
     exit();
@@ -58,7 +58,7 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"])) {
 <div>
     <?php
     include "../basedados/basedados.h";
-    session_start();
+
     $user_id = $_SESSION["user"];
     global $conn;
     $sql = "SELECT * FROM users WHERE ID=" . $user_id;
