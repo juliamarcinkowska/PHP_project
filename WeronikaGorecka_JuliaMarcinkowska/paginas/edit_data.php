@@ -25,15 +25,15 @@ if (isset($_SESSION["user"])) {
     if (mysqli_affected_rows($conn) == 1)
         echo "Edition of personal information successful.";
     else
-        echo "Edition of personal information failed, try again later or contact us.";
+        echo "Edition of personal information failed or no changes were made. Try again later or contact us.";
 
     switch ($_SESSION["type"]) {
         case 1:
-            header('refresh:2; url=client_page.php');
+            header('refresh:4; url=client_page.php');
             break;
         case 3:
         case 2:
-            header('refresh:2; url=employee_page.php');
+            header('refresh:4; url=employee_page.php');
             break;
     }
 } else {

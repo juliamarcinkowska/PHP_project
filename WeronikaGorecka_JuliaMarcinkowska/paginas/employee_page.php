@@ -1,4 +1,6 @@
 <?php
+include "../basedados/basedados.h";
+
 session_start();
 if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] == 1) {
     echo "Error, redirecting to client page.";
@@ -30,8 +32,22 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
             Your personal data
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a class="btn btn-dark" href="#">Edit</a>
+            <p class="card-text">
+                <?php
+                $user_id = $_SESSION["user"];
+                global $conn;
+                $sql = "SELECT * FROM users WHERE ID=" . $user_id;
+                $retval = mysqli_query($conn, $sql);
+                if (!$retval) {
+                    die('Could not get data: ' . mysqli_error($conn));
+                }
+                $row = mysqli_fetch_array($retval);
+                echo "Your name: " . $row["name"] . "<br>";
+                echo "Your email: " . $row["email"] . "<br>";
+                echo "Your login: " . $row["login"] . "<br>";
+                ?>
+            </p>
+            <a class="btn btn-dark" href="edit_data_view.php">Edit</a>
         </div>
     </div>
 </div>
@@ -42,7 +58,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
         </div>
         <div class="card-body">
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a class="btn btn-dark" href="#">Go to reservations</a>
+            <a class="btn btn-dark" href="tickets_table.php">Go to reservations</a>
         </div>
     </div>
     <div class="card">

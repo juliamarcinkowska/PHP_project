@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Reservations</title>
+    <link rel="stylesheet" href="bootstrap-4.5.0/css/bootstrap.min.css"/>
+
+    <style>
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        th {
+            width: 170px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="d-flex">
+    <img src="resources/bus_icon.png" class="mx-auto mt-lg-5 mb-lg-4" style="width: 250px;"/>
+</div>
+<div class="justify-content-center d-flex">
+    <table style='text-align:center;'>
+        <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Login</th>
+            <th>City from</th>
+            <th>City to</th>
+            <th>Departure time</th>
+            <th>Arrival time</th>
+            <th>No of tickets</th>
+            <th>Reservation status</th>
+            <th></th>
+        </tr>
+        <?php
+        include "../basedados/basedados.h";
+        session_start();
+        global $conn;
+        $sql = "SELECT * FROM tickets";
+        $retval = mysqli_query($conn, $sql);
+        if (!$retval) {
+            die('Could not get data: ' . mysqli_error($conn));
+        }
+        while ($row = mysqli_fetch_array($retval)) {
+            echo "<tr><td>" . $row["date"] . "</td>";
+            $sql_u = "SELECT * FROM users WHERE ID =" . $row["user_id"];
+            $retval_u = mysqli_query($conn, $sql_u);
+            if (!$retval_u) {
+                die('Could not get data: ' . mysqli_error($conn));
+            }
+            $user = mysqli_fetch_array($retval_u);
+            echo "<td>" . $user['name'] . "</td>";
+            echo "<td>" . $user['login'] . "</td>";
+            $sql_c = "SELECT * FROM courses WHERE ID =" . $row["course_id"];
+            $retval_c = mysqli_query($conn, $sql_c);
+            if (!$retval_c) {
+                die('Could not get data: ' . mysqli_error($conn));
+            }
+            $course = mysqli_fetch_array($retval_c);
+            echo "<td>" . $course['city_from'] . "</td>";
+            echo "<td>" . $course['city_to'] . "</td>";
+            echo "<td>" . $course['hour_dep'] . "</td>";
+            echo "<td>" . $course['hour_arr'] . "</td>";
+            echo "<td>" . $row["pass_no"] . "</td>";
+            switch ($row["status"]) {
+                case 0:
+                    $status = "Reserved";
+                    break;
+                case 1:
+                    $status = "Payed for";
+                    break;
+                case -1:
+                    $status = "Cancelled";
+                    break;
+            }
+            echo "<td>" . $status . "</td></tr>";
+
+        }
+        ?>
+    </table>
+</div>
+</body>
+</html>
