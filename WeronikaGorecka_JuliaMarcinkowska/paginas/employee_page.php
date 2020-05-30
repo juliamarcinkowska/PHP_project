@@ -29,6 +29,9 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
     </style>
 </head>
 <body class="text-center">
+<div class="d-flex justify-content-end m-2">
+    <a href="logout.php" class="btn btn-lg btn-dark mr-1">Log out</a>
+</div>
 <div class="d-flex">
     <img class="mx-auto mt-lg-5 mb-lg-4" src="resources/bus_icon.png" style="width: 250px;"/>
 </div>
@@ -73,7 +76,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
         </div>
         <div class="card-body">
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a class="btn btn-dark" href="#">Go to clients</a>
+            <a class="btn btn-dark" href="users_table.php">Go to clients</a>
         </div>
     </div>
 </div>
