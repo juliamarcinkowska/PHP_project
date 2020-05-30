@@ -13,18 +13,24 @@ if (isset($_POST["login"]) && isset($_POST["password"])) {
         die('Could not get data: ' . mysqli_error($conn));
     }
     $row = mysqli_fetch_array($retval);
-
-    if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0 && $row["status"] == 1) {
+    if (!$row) {
+        $_SESSION["user"] = -1;
+        $_SESSION["type"] = -1;
+        echo "Invalid login or password, please try to log in again or contact administrator.";
+        header('refresh:3; url=index.html');
+    } else if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0 && $row["status"] == 1) {
         $_SESSION["user"] = $row["ID"];
         $_SESSION["type"] = $row["usertype"];
-    } else if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0 && $row["status"] == 0){
+    } else if (strcmp($row["login"], $login) == 0 && strcmp($row["password"], $password) == 0 && $row["status"] == 0) {
         echo "Your account is registered, but not yet confirmed.";
         $_SESSION["user"] = -1;
         $_SESSION["type"] = -1;
         header('refresh:3; url=index.html');
-    }else {
+    } else {
         $_SESSION["user"] = -1;
         $_SESSION["type"] = -1;
+        echo "Invalid login or password, please try to log in again or contact administrator.";
+        header('refresh:3; url=index.html');
     }
 
     switch ($_SESSION["type"]) {
