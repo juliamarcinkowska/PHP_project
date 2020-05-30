@@ -56,8 +56,8 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
                         die('Could not get data: ' . mysqli_error($conn));
                     }
                     $course = mysqli_fetch_array($retval_c);
-                    $sql_r = "SELECT sum(pass_no) FROM tickets where course_id=" . $course_id . " AND date='" . $date .
-                        "'AND status <> -1";
+                    $sql_r = "SELECT sum(pass_no) FROM tickets where course_id=" . $course_id . " AND date='" . $date_sel .
+                        "'AND status <> '-1'";
                     $retval_r = mysqli_query($conn, $sql_r);
                     if (!$retval_r) {
                         die('Could not get data: ' . mysqli_error($conn));

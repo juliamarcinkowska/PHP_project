@@ -29,6 +29,10 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
         th {
             width: 200px;
         }
+
+        tr {
+            height: 50px;
+        }
     </style>
 </head>
 
@@ -55,9 +59,9 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
                     die('Could not get data: ' . mysqli_error($conn));
                 }
                 $row = mysqli_fetch_array($retval);
-                echo "Your name: " . $row["name"] . "<br>";
-                echo "Your email: " . $row["email"] . "<br>";
-                echo "Your login: " . $row["login"] . "<br>";
+                echo "<b>Your name:</b> " . $row["name"] . "<br>";
+                echo "<b>Your email: </b>" . $row["email"] . "<br>";
+                echo "<b>Your login: </b>" . $row["login"] . "<br>";
                 ?>
             </p>
             <a href="edit_data_view.php" class="btn btn-dark">Edit</a>
@@ -80,6 +84,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
                     <th>Arrival time</th>
                     <th>No of passengers</th>
                     <th>Status</th>
+                    <th></th>
                 </tr>
                 <?php
                 $sql = "SELECT * FROM tickets WHERE user_id=" . $user_id;
@@ -99,7 +104,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
                     echo "<td>" . $course['city_to'] . "</td>";
                     echo "<td>" . $course['hour_dep'] . "</td>";
                     echo "<td>" . $course['hour_arr'] . "</td>";
-                    echo "<td>" . $row["pass_no"] . "</td>";
+                    echo "<td>" . $row['pass_no'] . "</td>";
                     switch ($row["status"]) {
                         case 0:
                             $status = "Reserved";
@@ -111,7 +116,13 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
                             $status = "Cancelled";
                             break;
                     }
-                    echo "<td>" . $status . "</td></tr>";
+                    echo "<td>" . $status . "</td>";
+                    if ($row["status"] == 0) {
+                        echo "<td><a href='cancel_reservation.php?ticket_id=" . $row['ID'] . "' class='btn btn-dark'>Cancel</td></tr>";
+                    } else {
+                        echo "</tr>";
+                    }
+
                 }
                 ?>
             </table>
@@ -121,9 +132,36 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
         </div>
     </div>
 </div>
-<div class="jumbotron">
-    <h1 class="display-4">Contact information</h1>
-    <p class="align-self-lg-start">Address:</p>
+<div class="jumbotron d-flex justify-content-center">
+    <div class="container">
+        <h1 class="display-4">Contact information</h1>
+        <p class="lead">
+        <h3><b>CBBus</b> <br></h3>
+        <div class="d-flex justify-content-center">
+            <table>
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td class="pr-lg-5"><b>Adress:</b></td>
+                    <td class="pl-lg-5">Av. 1 de Maio 235,<br>6000-086 Castelo Branco</td>
+                </tr>
+                <tr>
+                    <td class="pr-lg-5"><b>Contact:</b></td>
+                    <td class="pl-lg-5">info@cbbus.pt<br>+351 695 246 213</td>
+                </tr>
+                <tr>
+                    <td class="pr-lg-5"><b>Operating hours:</b></td>
+                    <td class="pl-lg-5">Monday to friday: 9.00 am to 19.00 pm <br>
+                        Saturday: 10.00 am to 14.00 <br>
+                        Sunday: Closed
+                    </td>
+                </tr>
+            </table>
+        </div>
+        </p>
+    </div>
 </div>
 </body>
 </html>
