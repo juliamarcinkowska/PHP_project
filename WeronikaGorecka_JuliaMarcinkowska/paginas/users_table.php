@@ -106,7 +106,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
 <div class="d-flex justify-content-center m-5">
     <?php
     if ($_SESSION["type"] == 3) {
-        echo "<a href='add_user.php' class='btn btn-dark'>Add new user</a>";
+        echo "<a href='add_user_view.php' class='btn btn-dark'>Add new user</a>";
     }
     ?>
 </div>

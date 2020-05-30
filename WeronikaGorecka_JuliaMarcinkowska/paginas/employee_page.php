@@ -72,11 +72,19 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
     </div>
     <div class="card">
         <div class="card-header">
-            Manage clients
+            Manage users
         </div>
         <div class="card-body">
             <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a class="btn btn-dark" href="users_table.php">Go to clients</a>
+            <?php
+            if ($_SESSION["type"] == 2) {
+                echo " <a class='btn btn-dark' href='users_table.php'>Go to clients</a>";
+            }
+            elseif ($_SESSION["type"] == 3) {
+                echo " <a class='btn btn-dark' href='users_table.php'>Go to users</a>";
+            }
+            ?>
+
         </div>
     </div>
 </div>
