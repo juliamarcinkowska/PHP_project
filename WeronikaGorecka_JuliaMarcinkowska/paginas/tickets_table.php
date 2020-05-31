@@ -1,5 +1,4 @@
 <?php
-include "../basedados/basedados.h";
 
 session_start();
 if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] == -1) {
