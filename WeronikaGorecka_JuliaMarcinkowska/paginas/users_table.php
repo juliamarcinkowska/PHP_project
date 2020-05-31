@@ -101,7 +101,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
             }
             elseif ($_SESSION["type"] == 3){
                 echo "<td><a href='edit_data_view.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Edit user</a></td>";
-                echo "<td><a href='#' class='btn btn-dark'>Delete user</a></td>";
+                echo "<td><a href='delete_user.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Delete user</a></td>";
             }
             echo "</tr>";
         }
