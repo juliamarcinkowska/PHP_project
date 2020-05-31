@@ -54,9 +54,9 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
                 echo "Your name: " . $row["name"] . "<br>";
                 echo "Your email: " . $row["email"] . "<br>";
                 echo "Your login: " . $row["login"] . "<br>";
+                echo "<a href='edit_data_view.php?user_id=" . $_SESSION["user"] . "' class='btn btn-dark'>Edit</a>";
                 ?>
             </p>
-            <a class="btn btn-dark" href="edit_data_view.php">Edit</a>
         </div>
     </div>
 </div>
