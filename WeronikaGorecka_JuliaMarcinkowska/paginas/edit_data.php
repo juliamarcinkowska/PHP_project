@@ -13,7 +13,7 @@ if (isset($_SESSION["user"])) {
     $email = $_POST["email"];
     $login = $_POST["login"];
     $password = $_POST["password"];
-    $user_id = $_SESSION["user"];
+    $user_id = $_POST["user"];
     global $conn;
     $sql = "SELECT * FROM users WHERE ID=" . $user_id;
     $retval = mysqli_query($conn, $sql);

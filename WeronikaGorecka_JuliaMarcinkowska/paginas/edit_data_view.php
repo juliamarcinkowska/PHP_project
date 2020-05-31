@@ -59,7 +59,7 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
     <?php
     include "../basedados/basedados.h";
 
-    $user_id = $_SESSION["user"];
+    $user_id = $_GET["user_id"];
     global $conn;
     $sql = "SELECT * FROM users WHERE ID=" . $user_id;
     $retval = mysqli_query($conn, $sql);
@@ -83,6 +83,7 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
            required/>
     <input type='password' name='password' class='form-control mt-lg-1' placeholder="Password"
            value='<?php echo $password; ?>' required/>
+    <input type = 'hidden' name='user' value='<?php echo $user_id; ?>'/>
     <button class='btn btn-lg btn-primary btn-block mt-lg-1' type='submit'>Submit</button>
 </form>
 
