@@ -30,6 +30,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
         th {
             width: 200px;
         }
+
         tr {
             height: 75px;
         }
@@ -37,6 +38,9 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
 </head>
 
 <body>
+<div class="d-flex justify-content-end m-2">
+    <a href="logout.php" class="btn btn-lg btn-dark mr-1">Log out</a>
+</div>
 <div class="d-flex">
     <img src="resources/bus_icon.png" class="mx-auto mt-lg-5 mb-lg-4" style="width: 250px;"/>
 </div>

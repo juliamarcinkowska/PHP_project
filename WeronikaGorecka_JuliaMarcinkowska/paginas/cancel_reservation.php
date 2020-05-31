@@ -8,11 +8,6 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
     header('refresh:2; url=index.html');
     exit();
 }
-if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] != 1 && $_SESSION["type"] != -1) {
-    echo "Error, redirecting to employee page.";
-    header('refresh:2; url=employee_page.php');
-    exit();
-}
 
 global $conn;
 if (isset($_SESSION["user"])) {
@@ -24,21 +19,19 @@ if (isset($_SESSION["user"])) {
         die('Could not get data: ' . mysqli_error($conn));
     }
     $row = mysqli_fetch_array($retval);
-    if ($row['user_id'] != $user_id) {
-        echo "You can cancel only your reservations.";
+    $sql_cr = "UPDATE tickets SET status='" . -1 . "' WHERE id=" . $ticket_id;
+    $retval_cr = mysqli_query($conn, $sql_cr);
+    if (!$retval_cr) {
+        die('Could not update data: ' . mysqli_error($conn));
+    }
+    if (mysqli_affected_rows($conn) == 1)
+        echo "Your reservation has been successfully cancelled.";
+    else
+        echo "Cancellation of your reservation failed. Try again later or contact us.";
+    if ($_SESSION["type"] == 1) {
         header('refresh:2; url=client_page.php');
-        exit();
     } else {
-        $sql_cr = "UPDATE tickets SET status='" . -1 . "' WHERE id=" . $ticket_id;
-        $retval_cr = mysqli_query($conn, $sql_cr);
-        if (!$retval_cr) {
-            die('Could not update data: ' . mysqli_error($conn));
-        }
-        if (mysqli_affected_rows($conn) == 1)
-            echo "Your reservation has been successfully cancelled.";
-        else
-            echo "Cancellation of your reservation failed. Try again later or contact us.";
-        header('refresh:2; url=client_page.php');
+        header('refresh:2; url=employee_page.php');
     }
 }
 ?>
