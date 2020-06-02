@@ -67,12 +67,19 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
     if (!$retval) {
         die('Could not get data: ' . mysqli_error($conn));
     }
-    echo "<select class='custom-select mt-lg-1' name='usertype_select' required autofocus>";
-    echo "<option value='' disabled selected>Choose usertype</option>";
-    while ($row = mysqli_fetch_array($retval)) {
-        echo "<option value='" . $row["ID"] . "'> " . $row["name"] . " </option>";
+    if ($_SESSION["type"] == 3) {
+        echo "<select class='custom-select mt-lg-1' name='usertype_select' required autofocus>";
+        echo "<option value='' disabled selected>Choose usertype</option>";
+        while ($row = mysqli_fetch_array($retval)) {
+            echo "<option value='" . $row["ID"] . "'> " . $row["name"] . " </option>";
+        }
+        echo "</select>";
     }
-    echo "</select>";
+    if ($_SESSION["type"] == 2) {
+        echo "<select class='custom-select mt-lg-1' name='usertype_select'>";
+        echo "<option value='1' selected>Client</option>";
+        echo "</select>";
+    }
     ?>
 
     <input type="text" name="name" class="form-control mt-lg-1" placeholder="Name" required>

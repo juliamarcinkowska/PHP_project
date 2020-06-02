@@ -99,7 +99,13 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
             if ($_SESSION["type"] == 2 && $row["status"] == 0) {
                 echo "<td><a href='confirm_client.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Confirm</a></td>";
             }
-            elseif ($_SESSION["type"] == 3){
+            if ($_SESSION["type"] == 2) {
+                if ($row["status"] != 0) {
+                    echo "<td></td>";
+                }
+                echo "<td><a href='edit_data_view.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Edit client</a></td>";
+                echo "<td><a href='delete_user.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Delete client</a></td>";
+            } elseif ($_SESSION["type"] == 3) {
                 echo "<td><a href='edit_data_view.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Edit user</a></td>";
                 echo "<td><a href='delete_user.php?user_id=" . $row['ID'] . "' class='btn btn-dark'>Delete user</a></td>";
             }
@@ -112,6 +118,8 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
     <?php
     if ($_SESSION["type"] == 3) {
         echo "<a href='add_user_view.php' class='btn btn-dark'>Add new user</a>";
+    } elseif ($_SESSION["type"] == 2) {
+        echo "<a href='add_user_view.php' class='btn btn-dark'>Add new client</a>";
     }
     ?>
 </div>
