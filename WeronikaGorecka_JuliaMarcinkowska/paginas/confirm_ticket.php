@@ -7,10 +7,16 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
     header('refresh:2; url=index.html');
     exit();
 }
-if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] == 2) {
-    echo "Error, redirecting to employee page.";
-    header('refresh:2; url=employee_page.php');
-    exit();
+if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && ($_SESSION["type"] == 2 || $_SESSION["type"] == 1)) {
+    if ($_SESSION["type"] == 2) {
+        echo "Error, redirecting to employee page.";
+        header('refresh:2; url=employee_page.php');
+        exit();
+    } else {
+        echo "Error, redirecting to client page.";
+        header('refresh:2; url=client_page.php');
+        exit();
+    }
 }
 global $conn;
 

@@ -9,6 +9,11 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
     exit();
 }
 
+if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] == 1) {
+    echo "Error, redirecting to client page.";
+    header('refresh:2; url=client_page.php');
+    exit();
+}
 global $conn;
 if (isset($_SESSION["user"])) {
     $user_id = $_GET["user_id"];

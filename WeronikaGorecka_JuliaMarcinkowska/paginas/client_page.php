@@ -7,7 +7,7 @@ if (!isset($_SESSION["user"]) || !isset($_SESSION["type"]) || $_SESSION["type"] 
     header('refresh:2; url=index.html');
     exit();
 }
-if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] != 1 && $_SESSION["type"] != -1) {
+if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] != 1) {
     echo "Error, redirecting to employee page.";
     header('refresh:2; url=employee_page.php');
     exit();
