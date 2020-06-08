@@ -51,31 +51,31 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] ==
                     die('Could not get data: ' . mysqli_error($conn));
                 }
                 $row = mysqli_fetch_array($retval);
-                echo "Your name: " . $row["name"] . "<br>";
-                echo "Your email: " . $row["email"] . "<br>";
-                echo "Your login: " . $row["login"] . "<br>";
-                echo "<a href='edit_data_view.php?user_id=" . $_SESSION["user"] . "' class='btn btn-dark'>Edit</a>";
+                echo "<b>Your name: </b>" . $row["name"] . "<br>";
+                echo "<b>Your email: </b>" . $row["email"] . "<br>";
+                echo "<b>Your login: </b>" . $row["login"] . "<br>";
+                echo "<a href='edit_data_view.php?user_id=" . $_SESSION["user"] . "' class='btn btn-dark mt-md-3'>Edit</a>";
                 ?>
             </p>
         </div>
     </div>
 </div>
 <div class="d-flex justify-content-center mt-lg-4 mb-lg-4">
-    <div class="card">
+    <div class="card" style="width: 500px">
         <div class="card-header">
             Manage reservations
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">Pode gerir aqui as reservas feitas pelos nossos clientes.</p>
             <a class="btn btn-dark" href="tickets_table.php">Go to reservations</a>
         </div>
     </div>
-    <div class="card">
+    <div class="card ml-lg-5" style="width: 500px">
         <div class="card-header">
             Manage users
         </div>
         <div class="card-body">
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">Pode gerir aqui os nossos utilizadores.</p>
             <?php
             if ($_SESSION["type"] == 2) {
                 echo " <a class='btn btn-dark' href='users_table.php'>Go to clients</a>";

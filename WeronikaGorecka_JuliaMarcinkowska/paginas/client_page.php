@@ -62,7 +62,7 @@ if (isset($_SESSION["user"]) && isset($_SESSION["type"]) && $_SESSION["type"] !=
                 echo "<b>Your name:</b> " . $row["name"] . "<br>";
                 echo "<b>Your email: </b>" . $row["email"] . "<br>";
                 echo "<b>Your login: </b>" . $row["login"] . "<br>";
-                echo "<a href='edit_data_view.php?user_id=" . $_SESSION["user"] . "' class='btn btn-dark'>Edit</a>";
+                echo "<a href='edit_data_view.php?user_id=" . $_SESSION["user"] . "' class='btn btn-dark mt-md-3'>Edit</a>";
                 ?>
             </p>
         </div>
